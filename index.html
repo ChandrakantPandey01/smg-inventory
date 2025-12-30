@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SMG Inventory System</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- LOGIN PAGE -->
+<div id="login-page" class="page active">
+  <div class="login-card">
+    <h1 class="logo">SMG</h1>
+    <h2>Login to your Account</h2>
+
+    <input type="text" id="username" placeholder="Username or Email" />
+    <input type="password" id="password" placeholder="Password" />
+
+    <div class="login-options">
+      <label><input type="checkbox" /> Remember me</label>
+      <a href="#">Forgot Password?</a>
+    </div>
+
+    <button onclick="login()">Login</button>
+    <p class="small-text">Don’t have an account? <a href="#">Register</a></p>
+  </div>
+</div>
+
+<!-- APP LAYOUT -->
+<div id="app" class="hidden">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h2 class="logo">SMG</h2>
+    <nav>
+      <button onclick="navigate('dashboard')">Dashboard</button>
+      <button onclick="navigate('parts')">Parts List</button>
+      <button onclick="navigate('request')">Request Part</button>
+      <button onclick="navigate('myrequests')">My Requests</button>
+      <button onclick="logout()">Logout</button>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="view active">
+      <h1>Dashboard</h1>
+      <p>Welcome to the SMG Inventory Management System.</p>
+    </section>
+
+    <!-- PARTS LIST -->
+    <section id="parts" class="view">
+      <h1>Parts List</h1>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Part ID</th>
+            <th>Part Name</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Location</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SMG-BAT-042</td>
+            <td>Front Brake</td>
+            <td>Mechanical</td>
+            <td>450</td>
+            <td>Zone A-10</td>
+            <td class="active">Active</td>
+          </tr>
+          <tr>
+            <td>SMG-EL-013</td>
+            <td>Electrics</td>
+            <td>Electrical</td>
+            <td>10</td>
+            <td>Zone A-7</td>
+            <td class="inactive">Inactive</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- REQUEST PART -->
+    <section id="request" class="view">
+      <h1>Request Part</h1>
+
+      <form onsubmit="submitRequest(event)">
+        <label>Part Name *</label>
+        <select required>
+          <option>Select Part</option>
+          <option>Front Brake</option>
+          <option>Electrics</option>
+        </select>
+
+        <label>Part ID *</label>
+        <input type="text" value="SMG-BAT-042" required />
+
+        <label>Quantity *</label>
+        <input type="number" placeholder="e.g. 5" required />
+
+        <label>Priority *</label>
+        <select>
+          <option>Low</option>
+          <option>Medium</option>
+          <option>High</option>
+        </select>
+
+        <label>Reason / Justification *</label>
+        <textarea placeholder="Enter reason for request" required></textarea>
+
+        <label>Warehouse Location *</label>
+        <input type="text" value="Zone A-12" required />
+
+        <div class="actions">
+          <button type="submit">Submit Request</button>
+          <button type="reset" class="secondary">Cancel</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- MY REQUESTS -->
+    <section id="myrequests" class="view">
+      <h1>My Requests</h1>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Request ID</th>
+            <th>Date</th>
+            <th>Quantity</th>
+            <th>Priority</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="request-table">
+          <tr>
+            <td>REQ-001</td>
+            <td>22/12/25</td>
+            <td>8</td>
+            <td>Medium</td>
+            <td class="rejected">Rejected</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
